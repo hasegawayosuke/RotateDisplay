@@ -63,6 +63,7 @@ static BOOL Rotate( int iDevNum,  SHORT dmOrientation )
         return FALSE;
     }
 
+	if( dm.dmDisplayOrientation == dmOrientation ) return TRUE;
     w = dm.dmPelsHeight;
     dm.dmPelsHeight = dm.dmPelsWidth;
     dm.dmPelsWidth = w;
@@ -354,14 +355,8 @@ int WINAPI WinMain(
         }
     }else{
         // run as a rotate command
-        if( lstrcmpA( lpCmdLine, "0" ) == 0 ){
-            dmOrientation = DMDO_DEFAULT;
-        }else if( lstrcmpA( lpCmdLine, "90" ) == 0 ){
+        if( lstrcmpA( lpCmdLine, "90" ) == 0 ){
             dmOrientation = DMDO_90;
-        }else if( lstrcmpA( lpCmdLine, "180" ) == 0 ){
-            dmOrientation = DMDO_180;
-        }else if( lstrcmpA( lpCmdLine, "180" ) == 0 ){
-            dmOrientation = DMDO_270;
         }else{
             dmOrientation = DMDO_DEFAULT;
         }
